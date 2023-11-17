@@ -1,6 +1,8 @@
 import { ImageResponse } from 'next/server'
 import colors from 'tailwindcss/colors'
 import { env } from '@/env'
+import { Products } from '@/data/@types/products'
+import { api } from '@/data/api'
 
 // Route segment config
 export const runtime = 'edge'
