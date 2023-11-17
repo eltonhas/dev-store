@@ -1,6 +1,5 @@
 import { ImageResponse } from 'next/server'
 import colors from 'tailwindcss/colors'
-import { ParamsProps, getProduct } from './page'
 import { env } from '@/env'
 
 // Route segment config
@@ -11,6 +10,24 @@ export const alt = ''
 export const size = {
   width: 1200,
   height: 630,
+}
+
+interface ParamsProps {
+  params: {
+    slug: string
+  }
+}
+
+async function getProduct(slug: string): Promise<Products> {
+  const response = await api(`/products/${slug}`, {
+    next: {
+      revalidate: 60 * 60, // 1 hour
+    },
+  })
+
+  const product = await response.json()
+
+  return product
 }
 
 export const contentType = 'image/png'

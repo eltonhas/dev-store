@@ -4,13 +4,13 @@ import { api } from '@/data/api'
 import { Metadata } from 'next'
 import Image from 'next/image'
 
-export interface ParamsProps {
+interface ParamsProps {
   params: {
     slug: string
   }
 }
 
-export async function getProduct(slug: string): Promise<Products> {
+async function getProduct(slug: string): Promise<Products> {
   const response = await api(`/products/${slug}`, {
     next: {
       revalidate: 60 * 60, // 1 hour
